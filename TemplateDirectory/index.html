@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>CloneMe | Katas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/qunit-1.18.0.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../css/styles.css" rel="stylesheet">
+</head>
+<body>
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">Katas</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="../index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h1>Template Directory</h1>
+
+  <p class="lead">My template directory for html & javascript katas with QUnit tests. Clone me.</p>
+
+  <form class="form-inline well">
+    <div class="form-group">
+      <label for="n1" class="sr-only">1st number</label>
+      <input id="n1" type="number" class="form-control" placeholder="number 1"/>
+    </div>
+    <p class="form-group">*</p>
+    <div class="form-group">
+      <label for="n2" class="sr-only">2nd number</label>
+      <input id="n2" type="number" class="form-control" placeholder="number 2"/>
+    </div>
+    <p class="form-group">=</p>
+    <div class="form-group">
+      <input id="result" class="form-control" readonly placeholder="result"/>
+    </div>
+  </form>
+</div>
+</div>
+<!-- /.container -->
+
+<!-- dependencies ------------------------------------------------------------------->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+<!-- logic -------------------------------------------------------------------------->
+
+<script id="codeUnderTest">
+  function somefunction(n1){return n1;}
+</script>
+
+<!-- UI ---------------------------------------------------------------------------->
+<script id="inputsandoutputs">
+  var inputs = {
+    n1: $("#n1"),
+    n2: $("#n2"),
+    both : $("#n1").add( $("#n2") )
+  }
+
+  var outputs = {
+    result: $("#result")
+  }
+</script>
+
+<script id="updates">
+  function someuiupdate(){
+    var result= somefunction(inputs.n1.val() + inputs.n2.val());
+    outputs.result.val( result );
+  }
+  ;(function updates(){
+    inputs.both.blur(someuiupdate);
+  })();
+</script>
+
+<!-- tests -------------------------------------------------------------------------->
+  <!-- qunit infrastructure -->
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="../js/qunit-1.18.0.js"></script>
+  <script src="../js/qunit-parameterize.js"></script>
+
+<!-- my tests -------------->
+<script src="tests.js"></script>
+
+<!-- end ---------------------------------------------------------------------------->
+</body>
+</html>

@@ -58,7 +58,7 @@
 }
 
 #qunit-banner {
-	height: 5px;
+	height: 15px;
 }
 
 #qunit-testrunner-toolbar {
@@ -226,7 +226,7 @@
 #qunit-tests .pass .test-actual,
 #qunit-tests .pass .test-expected           { color: #999; }
 
-#qunit-banner.qunit-pass                    { background-color: #C6E746; }
+#qunit-banner.qunit-pass                    { background-color: #40FF46; }
 
 /*** Failing Styles */
 
@@ -248,7 +248,7 @@
 #qunit-tests .fail .test-actual             { color: #EE5757; }
 #qunit-tests .fail .test-expected           { color: #008000; }
 
-#qunit-banner.qunit-fail                    { background-color: #EE5757; }
+#qunit-banner.qunit-fail                    { background-color: #FF4040; }
 
 /*** Skipped tests */
 
