@@ -66,15 +66,54 @@
 <script src="js/bootstrap.min.js"></script>
 
 <!-- extensions --------------------------------------------------------------------->
-<script id="UIextensions">
+<script id="extensions">
   String.prototype.toNumber || (String.prototype.toNumber= function(){ return parseFloat(this); });
 </script>
 
 <!-- logic -------------------------------------------------------------------------->
 
-<script id="logic">
+<script id="karatsuba-algorithm">
+  var dot=".", comma=",";
+
   function multiply(n1,n2){
-    return n1 * n2;
+    //
+    // result= (b^2 +b)x1y1 - b(x1-x0)(y1-y0) + (b+1)x0y0
+    //
+    var x = n1.toString().replace(comma, "");
+    var y = n2.toString().replace(comma, "");
+    var negx=false, negy=false;
+    if( !x.length && !y.length){throw "Can't multiply empty strings";}
+    if(x.indexOf(dot)>=0 || y.indexOf(dot)>=0){throw "Won't do fractions"}
+    //
+    if(x.substr(0,1)=="-"){
+      negx=true;
+      x= x.substr(1, x.length-1);
+    }
+    if(y.substr(0,1)=="-"){
+      negy=true;
+      y= y.substr(1, y.length-1);
+    }
+    var sign= ( negx ? !negy : negy) ? -1 : 1;
+
+    var l= Math.ceil(Math.max(x.length, y.length)/2) , x0, x1, y0, y1, b=1, b2b;
+    if(x.length > l){
+      x1 = x.substr(0, x.length-l);
+      x0 = x.substr(x.length-l, l)
+    }else{
+      x1="";
+      x0=x;
+    };
+    if(y.length > l){
+      y1 = y.substr(0, y.length-l);
+      y0 = y.substr(y.length-l, l)
+    }else{
+      y1="";
+      y0=y;
+    };
+    for(var i=0; i<l; i++){ b *= 10; }
+    b2b= b*b + b;
+    console.log("b, b2b, x0, x1, y0, y1", b, b2b, x0, x1, y0, y1);
+    return sign * ( b2b * x1 * y1 - b * (0 + x1 - x0) * (0 + y1 - y0 ) + (b+1) * x0 * y0 );
   }
 </script>
 
@@ -101,10 +140,15 @@
 </script>
 
 <!-- tests -------------------------------------------------------------------------->
-<div id="qunit"></div>
-<div id="qunit-fixture"></div>
-<script src="js/qunit-1.18.0.js"></script>
+  <!-- qunit infrastructure -->
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="js/qunit-1.18.0.js"></script>
+  <script src="js/qunit-parameterize.js"></script>
+
+<!-- my tests -------------->
 <script src="tests/karatsuba.js"></script>
 
+<!-- end ---------------------------------------------------------------------------->
 </body>
 </html>
